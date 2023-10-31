@@ -1,8 +1,12 @@
-import React from 'react';
-import login from '../../assets/images/login/login.svg'
+import React, { useContext } from 'react';
+import loginImg from '../../assets/images/login/login.svg'
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../Provider/AuthProvider';
 
 const Login = () => {
+
+    const {login}=useContext(AuthContext);
+
     const handleLogin = event => {
         event.preventDefault();
         const loginForm = event.target;
@@ -10,13 +14,20 @@ const Login = () => {
         const password = loginForm.password.value;
         const info = { email, password }
         console.log(info);
+
+        login(email,password)
+        .then(result=>{
+            const loggedUser=result.user;
+            console.log(loggedUser);
+        })
+        .catch(error=>console.log(error))
     }
 
     return (
         <div className="hero min-h-screen bg-base-200">
             <div className="hero-content flex-col lg:flex-row">
                 <div className="w-1/2 mr-12">
-                    <img src={login} alt="" />
+                    <img src={loginImg} alt="" />
                 </div>
                 <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
                     <form onSubmit={handleLogin} className="card-body">
