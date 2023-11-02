@@ -2,10 +2,11 @@ import React, { useContext } from 'react';
 import loginImg from '../../assets/images/login/login.svg'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
+import { FaFacebook, FaGoogle, FaInstagram } from 'react-icons/fa';
 
 const Login = () => {
 
-    const {login}=useContext(AuthContext);
+    const { login } = useContext(AuthContext);
 
     const handleLogin = event => {
         event.preventDefault();
@@ -15,12 +16,12 @@ const Login = () => {
         const info = { email, password }
         console.log(info);
 
-        login(email,password)
-        .then(result=>{
-            const loggedUser=result.user;
-            console.log(loggedUser);
-        })
-        .catch(error=>console.log(error))
+        login(email, password)
+            .then(result => {
+                const loggedUser = result.user;
+                console.log(loggedUser);
+            })
+            .catch(error => console.log(error))
     }
 
     return (
@@ -47,11 +48,17 @@ const Login = () => {
                                 <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                             </label>
                         </div>
-                        <div className="form-control mt-6">
+                        <div className="form-control mt-3">
                             <input className="btn btn-primary" type="submit" value="Login" />
                         </div>
                     </form>
-                    <p className='my-4 text-center'>New to Car Doctors <Link className='text-orange-600 font-bold' to='/signUp'>Sign Up</Link></p>
+                    <div className='text-center my-4 space-y-4'>
+                        <p>Or SIgn in with</p>
+                        <button className='mr-3 bg-orange-300 p-3 rounded-full'><FaGoogle className='fill-red-500 text-2xl' /></button>
+                        <button className='mr-3 bg-orange-300 p-3 rounded-full'><FaFacebook className='fill-blue-500 text-2xl' /></button>
+                        <button className='bg-orange-300 p-3 rounded-full'><FaInstagram className='fill-red-700 text-2xl' /></button>
+                        <p>New to Car Doctors <Link className='text-orange-600 font-bold' to='/signUp'>Sign Up</Link></p>
+                    </div>
                 </div>
             </div>
         </div>

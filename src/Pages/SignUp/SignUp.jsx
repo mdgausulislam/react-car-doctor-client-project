@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import login from '../../assets/images/login/login.svg'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
+import { FaFacebook, FaGoogle, FaInstagram } from 'react-icons/fa';
 
 const SignUp = () => {
     const {createUser}=useContext(AuthContext);
@@ -54,11 +55,17 @@ const SignUp = () => {
                             <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
                         </label>
                     </div>
-                    <div className="form-control mt-6">
+                    <div className="form-control mt-3">
                         <input className="btn btn-primary" type="submit" value="SignUp" />
                     </div>
                 </form>
-                <p className='my-4 text-center'>Already Have an Account <Link className='text-orange-600 font-bold' to='/login'>Login</Link></p>
+                <div className='text-center my-4 space-y-4'>
+                        <p>Or SIgn in with</p>
+                        <button className='mr-3 bg-orange-300 p-3 rounded-full'><FaGoogle className='fill-red-500 text-2xl' /></button>
+                        <button className='mr-3 bg-orange-300 p-3 rounded-full'><FaFacebook className='fill-blue-500 text-2xl' /></button>
+                        <button className='bg-orange-300 p-3 rounded-full'><FaInstagram className='fill-red-700 text-2xl' /></button>
+                        <p>Have an account?  <Link className='text-orange-600 font-bold' to='/login'>Login</Link></p>
+                    </div>
             </div>
         </div>
     </div>
