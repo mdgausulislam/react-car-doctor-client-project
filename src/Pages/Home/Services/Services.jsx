@@ -5,9 +5,10 @@ const Services = () => {
     const [services, setServices] = useState([]);
     useEffect(() => {
         fetch('http://localhost:5000/services')
-            .then(res => res.json())
-            .then(data => setServices(data))
-    }, [])
+            .then((res) => res.json())
+            .then((data) => setServices(data))
+            .catch((error) => console.error('Error fetching data:', error));
+    }, []);
 
     return (
         <div className='mt-4'>
