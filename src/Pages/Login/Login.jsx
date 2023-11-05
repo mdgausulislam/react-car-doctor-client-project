@@ -2,7 +2,8 @@ import React, { useContext } from 'react';
 import loginImg from '../../assets/images/login/login.svg'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
-import { FaFacebook, FaGoogle, FaInstagram } from 'react-icons/fa';
+import SocialLogin from '../Shared/SocialLogin/SocialLogin';
+// import { FaFacebook, FaGoogle, FaInstagram } from 'react-icons/fa';
 
 const Login = () => {
 
@@ -23,29 +24,8 @@ const Login = () => {
         login(email, password)
             .then(result => {
                 const loggedUser = result.user;
-
-                const user = {
-                    email: loggedUser.email
-                }
-                console.log(user);
-               
-
-                fetch('http://localhost:5000/jwt', {
-                    method: "POST",
-                    headers: {
-                        'content-type': 'application/json'
-                    },
-                    body: JSON.stringify(user)
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        console.log('jwt response', data)
-
-                        //warning: local storage is not the best (second best place) to store access token
-
-                        localStorage.setItem('car-access-token',data.token)
-                         navigate(from, {replace:true})
-                    })
+                console.log(loggedUser);
+                navigate(from, { replace: true })
             })
             .catch(error => console.log(error))
     }
@@ -79,10 +59,11 @@ const Login = () => {
                         </div>
                     </form>
                     <div className='text-center my-4 space-y-4'>
-                        <p>Or SIgn in with</p>
+                        {/* <p>Or SIgn in with</p>
                         <button className='mr-3 bg-orange-300 p-3 rounded-full'><FaGoogle className='fill-red-500 text-2xl' /></button>
                         <button className='mr-3 bg-orange-300 p-3 rounded-full'><FaFacebook className='fill-blue-500 text-2xl' /></button>
-                        <button className='bg-orange-300 p-3 rounded-full'><FaInstagram className='fill-red-700 text-2xl' /></button>
+                        <button className='bg-orange-300 p-3 rounded-full'><FaInstagram className='fill-red-700 text-2xl' /></button> */}
+                        <SocialLogin></SocialLogin>
                         <p>New to Car Doctors <Link className='text-orange-600 font-bold' to='/signUp'>Sign Up</Link></p>
                     </div>
                 </div>
