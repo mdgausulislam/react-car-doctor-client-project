@@ -2,10 +2,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../Provider/AuthProvider';
 import BookingRow from './BookingRow';
 import Swal from 'sweetalert2';
+import { useNavigate } from 'react-router-dom';
 
 const Bookings = () => {
     const { users } = useContext(AuthContext);
     const [bookings, setBookings] = useState([]);
+    const navigate=useNavigate();
 
     const url = `http://localhost:5000/bookings?email=${users.email}`;
     useEffect(() => {
@@ -16,8 +18,16 @@ const Bookings = () => {
             }
         })
             .then(res => res.json())
-            .then(data => setBookings(data))
-    }, [url])
+            .then(data => {
+                if(!data.error){
+                    setBookings(data)
+                }
+                else{
+                    navigate('/')
+                }
+                
+            })
+    }, [url,navigate])
 
 
 
