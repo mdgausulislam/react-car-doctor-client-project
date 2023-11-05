@@ -7,10 +7,10 @@ import { FaFacebook, FaGoogle, FaInstagram } from 'react-icons/fa';
 const Login = () => {
 
     const { login } = useContext(AuthContext);
-    const location=useLocation();
-    const navigate=useNavigate();
+    const location = useLocation();
+    const navigate = useNavigate();
 
-    const from=location.state?.from?.pathname || '/';
+    const from = location.state?.from?.pathname || '/';
 
     const handleLogin = event => {
         event.preventDefault();
@@ -23,8 +23,29 @@ const Login = () => {
         login(email, password)
             .then(result => {
                 const loggedUser = result.user;
-                console.log(loggedUser);
-                navigate(from, {replace:true})
+
+                const user = {
+                    email: loggedUser.email
+                }
+                console.log(user);
+               
+
+                fetch('http://localhost:5000/jwt', {
+                    method: "POST",
+                    headers: {
+                        'content-type': 'application/json'
+                    },
+                    body: JSON.stringify(user)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log('jwt response', data)
+
+                        //warning: local storage is not the best (second best place) to store access token
+
+                        localStorage.setItem('car-access-token',data.token)
+                         navigate(from, {replace:true})
+                    })
             })
             .catch(error => console.log(error))
     }
