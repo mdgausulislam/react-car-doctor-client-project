@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import login from '../../assets/images/login/login.svg'
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../../Provider/AuthProvider';
-import { FaFacebook, FaGoogle, FaInstagram } from 'react-icons/fa';
+// import { FaFacebook, FaGoogle, FaInstagram } from 'react-icons/fa';
 import SocialLogin from '../Shared/SocialLogin/SocialLogin';
 
 const SignUp = () => {

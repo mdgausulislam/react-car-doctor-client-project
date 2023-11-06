@@ -9,7 +9,7 @@ const Bookings = () => {
     const [bookings, setBookings] = useState([]);
     const navigate=useNavigate();
 
-    const url = `http://localhost:5000/bookings?email=${users.email}`;
+    const url = `https://car-doctor-server-flame-gamma.vercel.app/bookings?email=${users.email}`;
     useEffect(() => {
         fetch(url,{
             method:'GET',
@@ -34,7 +34,7 @@ const Bookings = () => {
     const handleDelete = id => {
         const proceed = confirm('Are you sure you want to delete');
         if (proceed) {
-            fetch(`http://localhost:5000/bookings/${id}`, {
+            fetch(`https://car-doctor-server-flame-gamma.vercel.app/bookings/${id}`, {
                 method: 'DELETE'
             })
                 .then(res => res.json())
@@ -57,7 +57,7 @@ const Bookings = () => {
 
 
     const handlePendingConfirm = id => {
-        fetch(`http://localhost:5000/bookings/${id}`, {
+        fetch(`https://car-doctor-server-flame-gamma.vercel.app/bookings/${id}`, {
             method: 'PATCH',
             headers:{
                 'content-type':'application/json'
